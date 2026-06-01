@@ -21,6 +21,10 @@ def main():
     p2 = Mago("Merlon", 3000)
 
     p1.atacar(p2, 1000)
+    p2.curar()
+    p2.atacar(p1, 20000)
+    p1.curar()
+    
 
 if __name__ == "__main__":
     main()
@@ -37,14 +41,14 @@ if __name__ == "__main__":
 # Merlin recebeu dano de 206!
 
 # abaixo de     p1.atacar(p2, 1000)
-    p2.curar()
+#    p2.curar()
 
 # Merlin fez uma magia de cura e recuperou 7 pontos de vida.
 
-    p2.atacar(p1, 20000)
+#    p2.atacar(p1, 20000)
 
 # Merlin(2745) atacou Kratos(2000) com um Bola de Fogo de força 20000
 # Kratos recebeu dano de 7834!
 
-    p1.curar()
+#    p1.curar()
 # Kratos enrolou uma atadura nos ferimentos e recuperu 5 pontos de vida.

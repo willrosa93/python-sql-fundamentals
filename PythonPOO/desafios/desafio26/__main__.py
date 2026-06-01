@@ -25,11 +25,11 @@ def main():
     f1.calcular_salario()
     f1.analisar_salario()
 
-    f2 = FuncionarioMensalista("Amanad", 9500)
+    f2 = FuncionarioMensalista("Amanda", 9500)
     f2.calcular_salario()
     f2.analisar_salario()
 
-if __main__ == "__main__":
+if __name__ == "__main__":
     main()
 
 # Resultado em etiqueta

@@ -20,13 +20,13 @@
 # calc_frete() 
 # Máximo 10km
 
-import ... 
+from transporte import *
 
 def main():
-    dist = 93
+    dist = 10
 
-    entrega = Moto(dist)
-    print(f"Frete de {type(entrega).__name} e, {dist}Km = {entrega.calcular_frete()}")
+    entrega = Drone(dist)
+    print(f"Frete de {type(entrega).__name__} em {dist}Km = {entrega.calc_frete()}")
 
 if __name__ == "__main__":
     main()
