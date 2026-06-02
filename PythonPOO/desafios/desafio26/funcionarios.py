@@ -6,7 +6,7 @@ class Funcionarios(ABC):
     sal_min = 1612
     inss = 7.5
 
-    def __init__(self, nome, sal_bruto=0):
+    def __init__(self, nome = None, sal_bruto=0):
         self.nome = nome
         self.sal_bruto = sal_bruto
         self.salario = 0
@@ -29,7 +29,7 @@ class Funcionarios(ABC):
         )
 
 class FuncionarioHorista(Funcionarios):
-    def __init__(self, nome, valor_hora, horas_trab):
+    def __init__(self, nome, valor_hora = 7.37, horas_trab = 220):
         super().__init__(nome)
         self.valor_hora = valor_hora
         self.horas_trab = horas_trab
@@ -42,9 +42,10 @@ class FuncionarioHorista(Funcionarios):
         self.salario = self.sal_bruto - desconto
 
 class FuncionarioMensalista(Funcionarios):
-    def __init__(self, nome, sal_bruto):
-        super().__init__(nome, sal_bruto)
-
+    def __init__(self, nome, sal_bruto = Funcionarios.sal_min):
+        super().__init__(nome)
+        self.sal_bruto = sal_bruto
+        
     def calcular_salario(self):
         desconto = self.sal_bruto * (self.inss / 100)
 

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from random import choice, randint
+import random
 
 
 class Personagem(ABC):
@@ -8,22 +8,21 @@ class Personagem(ABC):
         self.vida = vida
         self.golpes = []
 
-    def atacar(self, alvo, forca):
-        golpe = choice(self.golpes)
-        dano = randint(1, forca)
-
-        print(
-            f"{self.nome} ({self.vida}) atacou "
-            f"{alvo.nome} ({alvo.vida}) com um "
-            f"{golpe} de força {forca}"
-        )
-
-        alvo.receber_dano(dano)
+    def atacar(self, alvo, forca = 100):
+        if self.vida > 0 and alvo.vida > 0:
+            # vai rolar o golpe
+            golpe = self.golpes[random.randrange(0, len(self.golpes))]
+            print(f"{self.nome} ({self.vida}) atacou {alvo.nome} ({alvo.vida}) com um {golpe}")
+            alvo.receber_dano(forca)
+        else: 
+            print(f"O ataque {self.nome} -> {alvo.nome} não pode acontecer")
 
     def receber_dano(self, dano):
-        self.vida -= dano
-
-        print(f"{self.nome} recebeu dano de {dano}!")
+        fator = random.randint(0, dano)
+        self.vida = self.vida - fator
+        if self.vida < 0:
+            self.vida = 0
+        print(f"{self.nome} recebeu dano de {fator}")
 
     @abstractmethod
     def curar(self):
@@ -41,14 +40,14 @@ class Guerreiro(Personagem):
         ]
 
     def curar(self):
-        cura = randint(1, 10)
+        fator = random.randint(1, 100)
 
-        self.vida += cura
+        self.vida += fator
 
         print(
             f"{self.nome} enrolou uma atadura "
             f"nos ferimentos e recuperou "
-            f"{cura} pontos de vida."
+            f"{fator} pontos de vida."
         )
 
 class Mago(Personagem):
@@ -63,11 +62,11 @@ class Mago(Personagem):
         ]
 
     def curar(self):
-        cura = randint(1, 10)
+        fator = random.randint(1, 100)
 
-        self.vida += cura
+        self.vida += fator
 
         print(
             f"{self.nome} fez uma magia de cura "
-            f"e recuperou {cura} pontos de vida."
+            f"e recuperou {fator} pontos de vida."
         )

@@ -13,18 +13,23 @@
 
 # Mago
 # curar()
-
+from rich import inspect
 from personagens_rpg import *
 
 def main():
-    p1 = Guerreiro("Kratos", 2000)
-    p2 = Mago("Merlon", 3000)
+#    p1 = Guerreiro("Kratos", 2000)
+#    p2 = Mago("Merlon", 3000)
 
-    p1.atacar(p2, 1000)
-    p2.curar()
-    p2.atacar(p1, 20000)
+#    p1.atacar(p2, 1000)
+#    p2.curar()
+#    p2.atacar(p1, 20000)
+#    p1.curar()
+    p1 = Guerreiro("Pikachu", 1000)
+    p2 = Mago("Gandalf", 2000)
+    p1.atacar(p2, 20000)
+    p2.atacar(p1)
     p1.curar()
-    
+    p2.curar()
 
 if __name__ == "__main__":
     main()

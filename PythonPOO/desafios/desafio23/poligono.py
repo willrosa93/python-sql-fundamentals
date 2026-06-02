@@ -7,11 +7,11 @@ class Poligono(ABC):
         self.qtd_lados = qtd_lados
 
     @abstractmethod
-    def perimetro(self):
+    def perimetro(self) -> float:
         pass
 
     @abstractmethod
-    def area(self):
+    def area(self) -> float:
         pass
 
 

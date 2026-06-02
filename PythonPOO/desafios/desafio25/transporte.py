@@ -1,63 +1,67 @@
 # Crie classes capazes de calcular frete de veículos diferentes
 
 # Transporte (abstract)
-# distancia
+# distanciaancia
 # frete
-# calc_frete() (abstract)
+# calcular_frete() (abstract)
 
 # Moto
 # fator = 0.50
-# calc_frete() 
-# Livre (nao importa distância)
+# calcular_frete() 
+# Livre (nao importa distanciaância)
 
 # Caminhao
 # fator = 1.20
-# calc_frete() 
+# calcular_frete() 
 # Mínimo 50km
 
 # Drone
 # fator = 9.50
-# calc_frete() 
+# calcular_frete() 
 # Máximo 10km
 from abc import ABC, abstractmethod
 from rich import print
 from rich.panel import Panel
 
 class Transporte(ABC):
-    def __init__(self, dist):
-        self.dist = dist
+    def __init__(self, distancia):
+        self.distancia = distancia
+        self.frete = 0
 
     @abstractmethod
-    def calc_frete(self):
+    def calcular_frete(self):
         pass
 
 class Moto(Transporte):
-    def __init__(self, dist):
-        super().__init__(dist)
-        self.fator = 0.5
+    fator = 0.5
+    def __init__(self, distancia):
+        super().__init__(distancia)
 
-    def calc_frete(self):
-        return self.dist * self.fator
+    def calcular_frete(self):
+        self.frete = self.distancia * Moto.fator
+        return f"R${self.frete:,.2f}"
 
 class Caminhao(Transporte):
-    def __init__(self, dist):
-        super().__init__(dist)
-        self.fator = 1.20
+        fator = 1.20
+        def __init__(self, distancia):
+            super().__init__(distancia)
 
-    def calc_frete(self):
-        if self.dist > 10:
-            return(f"Raio mínimo de 50km")
-        else:
-            return self.dist * self.fator
-        
+
+        def calcular_frete(self):
+            if self.distancia < 50:
+                return(f"Raio mínimo de 50km")
+            else:
+                self.frete = self.distancia * Caminhao.fator
+                return f"R${self.frete:,.2f}"
+
 class Drone(Transporte):
-    def __init__(self, dist):
-        super().__init__(dist)
-        self.fator = 9.50
+        fator = 9.50
+        def __init__(self, distancia):
+            super().__init__(distancia)
 
-    def calc_frete(self):
-        if self.dist > 10:
-            return(f"Raio máximo de 10km")
-        else:
-            return self.dist * self.fator
-        
+        def calcular_frete(self):
+            if self.distancia > 10:
+                return(f"Raio máximo de 10km")
+            else:
+                self.frete = self.distancia * Drone.fator
+                return f"R${self.frete:,.2f}"            
