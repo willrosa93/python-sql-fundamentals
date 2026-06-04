@@ -1,0 +1,35 @@
+services:
+
+  # Banco de dados PostgreSQL
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: banco_poo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data  # dados persistem ao parar o container
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # cria a tabela na primeira vez
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+
+  # A aplicação Python
+  app:
+    build: .                  # usa o Dockerfile desta pasta
+    depends_on:
+      postgres:
+        condition: service_healthy   # espera o PG estar pronto antes de subir
+    environment:
+      DB_HOST: postgres        # nome do serviço acima — NÃO é localhost!
+      DB_NAME: banco_poo
+      DB_USER: postgres
+      DB_PASSWORD: 123456
+    stdin_open: true           # mantém o terminal aberto (app interativo)
+    tty: true                  # necessário para input() funcionar
+
+volumes:
+  pg_data:
