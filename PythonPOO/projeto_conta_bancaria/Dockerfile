@@ -25,4 +25,4 @@ ENV DB_PASSWORD=123456
 EXPOSE 5432
 
 # 8. Comando que roda quando o container sobe
-CMD ["python", "-m", "projeto_conta_bancaria"]
+CMD ["python", "__main__.py"]
